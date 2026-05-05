@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cute Login</title>
+
+  <style>
+    body {
+      background: linear-gradient(to right, pink, lightpink);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    h2 {
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { color: hotpink; }
+      to { color: deeppink; text-shadow: 0 0 10px white; }
+    }
+
+    input {
+      font-size: 30px;
+      padding: 15px;
+      text-align: center;
+      width: 120px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      background: hotpink;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px pink;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* keypad */
+    .keypad {
+      text-align: center;
+    }
+
+    /* shake animation */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      color: red;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Enter Password 💖</h2>
+
+<input type="password" id="pass" maxlength="4" readonly>
+
+<!-- 🔢 Keypad -->
+<div class="keypad">
+  <button onclick="addNum(1)">1</button>
+  <button onclick="addNum(2)">2</button>
+  <button onclick="addNum(3)">3</button><br>
+  <button onclick="addNum(4)">4</button>
+  <button onclick="addNum(5)">5</button>
+  <button onclick="addNum(6)">6</button><br>
+  <button onclick="addNum(7)">7</button>
+  <button onclick="addNum(8)">8</button>
+  <button onclick="addNum(9)">9</button><br>
+  <button onclick="clearPass()">Clear ❌</button>
+</div>
+
+<br>
+
+<button onclick="checkPass()">Unlock 🔐</button>
+
+<p style="color:gray;">Hint: My birth date 💕</p>
+
+<script>
+function addNum(num) {
+  let input = document.getElementById("pass");
+  if (input.value.length < 4) {
+    input.value += num;
+  }
+}
+
+function clearPass() {
+  document.getElementById("pass").value = "";
+}
+
+function checkPass() {
+  let p = document.getElementById("pass").value;
+
+  if (p === "1454") {
+    window.location.href = "page2.html";
+  } else {
+    let box = document.getElementById("pass");
+    box.style.animation = "shake 0.3s";
+    setTimeout(() => {
+      box.style.animation = "";
+    }, 300);
+  }
+}
+
+/* hearts */
+function createHeart() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

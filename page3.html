@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hey cuttie</title>
+
+  <style>
+    body {
+      background: linear-gradient(to right, pink, lightpink);
+      text-align: center;
+      font-family: Algerian;
+      overflow: hidden;
+    }
+    /*teddy*/
+    .teddy{
+        width: 300px;
+        margin-top: 50px
+        animation: moveTeddy 2s infinite ease-in-out;
+    }
+
+    @keyframes moveTeddy{
+        0%{transform: translate(0px)rotate(0dge);}
+        50%{transform: translate(-20px)rotate(5dge);}
+        100%{transform: translate(0px)rotate(-5deg);}
+    }
+    
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    button:hover{
+        transform: scale(1.1);
+    }
+
+    #yes {
+      background: lightgray;
+      color: black;
+    }
+
+    #no {
+      background: lightblue;
+      color: black;
+      position: absolute;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      color: red;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    .confetti{
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top:0;
+        animation: fall 3s linear forwards;
+    }
+    @keyframes fall{
+        0%{transform: translateY(0)rotate(0dge);}
+        100%{transform: translateY(100vh);
+    rotate(360dge);}
+    }
+
+  </style>
+</head>
+
+<body>
+
+<img class="teddy"
+src="https://cdn-icons-png.flaticon.com/256/7880/7880193.png">
+
+<h2>Will you marry me?🧸💖</h2>
+
+<button id="yes" onclick="yesClick()">Yes 💕</button>
+<button id="no" onmouseover="moveNo()">No 😝</button>
+
+<h3 id="result"></h3>
+
+<!-- 🤖 AI Chat -->
+<div style="margin-top:30px;">
+  <input type="text" id="userInput" placeholder="Talk to me 💬">
+  <button onclick="reply()">Send 💌</button>
+  <p id="aiReply"></p>
+</div>
+
+<script>
+function yesClick() {
+  document.getElementById("result").innerHTML = 
+  "I knew it 😍💖 <br> You just made my life special ✨ <br> I promise to always make you smile 😊💕";
+
+  createConfetti();
+}
+
+function moveNo() {
+  let btn = document.getElementById("no");
+  btn.style.top = Math.random() * 400 + "px";
+  btn.style.left = Math.random() * 400 + "px";
+}
+
+/* hearts */
+function createHeart() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+
+/* confetti */
+function createConfetti() {
+  for (let i = 0; i < 50; i++) {
+    let confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor = 
+      "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+/* AI */
+function reply() {
+  let input = document.getElementById("userInput").value.toLowerCase();
+  let output = "";
+
+  if (input.includes("love")) {
+    output = "Aww 🥰 I love you too 💖";
+  } else if (input.includes("hi") || input.includes("hello")) {
+    output = "Hii cutie 😘";
+  } else if (input.includes("miss")) {
+    output = "I miss you more 🥺💞";
+  } else {
+    output = "You're so cute 😍💖";
+  }
+
+  document.getElementById("aiReply").innerHTML = output;
+}
+</script>
+
+</body>
+</html>
